@@ -13,7 +13,7 @@ import { Column } from "../../../lib/data-set/column";
                                    [isAllSelected]="isAllSelected"
                                    (click)="selectAllRows.emit($event)">
     </th>
-    <th ng2-st-actions-title *ngIf="showActionColumnLeft" [grid]="grid"></th>
+    <th ng2-st-actions-title *ngIf="showActionColumnLeft" [grid]="grid" [style.width]="actionsWidth"></th>
     <th *ngFor="let column of grid.getColumns()" class="ng2-smart-th {{ column.id }}" [ngClass]="column.class"
       [style.width]="column.width" >
       <ng2-st-column-title [source]="source" [column]="column" (sort)="sort.emit($event)"></ng2-st-column-title>
@@ -33,12 +33,14 @@ export class TheadTitlesRowComponent implements OnChanges {
   isMultiSelectVisible: boolean;
   showActionColumnLeft: boolean;
   showActionColumnRight: boolean;
+  actionsWidth: string;
 
 
   ngOnChanges() {
     this.isMultiSelectVisible = this.grid.isMultiSelectVisible();
     this.showActionColumnLeft = this.grid.showActionColumn('left');
     this.showActionColumnRight = this.grid.showActionColumn('right');
+    this.actionsWidth = this.grid.getSetting('actions.width');
   }
 
 }
